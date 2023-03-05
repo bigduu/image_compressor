@@ -12,7 +12,7 @@
 //! let origin_dir = PathBuf::from("origin").join("file1.jpg");
 //! let dest_dir = PathBuf::from("dest");
 //!
-//! let compressor = Compressor::new(image::load_from_memory(include_bytes!("../tests/test.jpg")).unwrap());
+//! let compressor = Compressor::new(vec![]);
 //! compressor.compress_image().expect("panic");
 //! ```
 
@@ -106,9 +106,10 @@ impl Compressor {
     /// let origin_dir = PathBuf::from("origin").join("file1.jpg");
     /// let dest_dir = PathBuf::from("dest");
     ///
-    /// let compressor = Compressor::new(image::load_from_memory(include_bytes!("../tests/test.jpg")).unwrap());
+    /// let compressor = Compressor::new(vec![]);
     /// ```
-    pub fn new(image: image::DynamicImage) -> Self {
+    pub fn new(vec: Vec<u8>) -> Self {
+        let image = image::load_from_memory(&vec).expect("load_from_memory failed");
         Compressor {
             factor: Factor::default(),
             image,
@@ -197,7 +198,7 @@ impl Compressor {
     /// let origin_dir = PathBuf::from("origin").join("file1.jpg");
     /// let dest_dir = PathBuf::from("dest");
     ///
-    /// let compressor = Compressor::new(image::load_from_memory(include_bytes!("../tests/test.jpg")).unwrap());
+    /// let compressor = Compressor::new(vec![]);
     /// compressor.compress_image().expect("panic");
     /// ```
     pub fn compress_image(&self) -> Result<Vec<u8>, Box<dyn Error>> {
