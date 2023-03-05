@@ -10,7 +10,6 @@ repository = "https://github.com/altair823/image_compressor"
 [dependencies]
 image = "0.24.1"
 mozjpeg = "0.9.2"
-crossbeam-queue = "0.3.5"
 
 [dev-dependencies]
 fs_extra = "1.2.0"
